@@ -219,7 +219,7 @@ class RouteTranslator
 
     # Translates a path and adds the locale prefix.
     def translate_path path, locale
-      final_optional_segments = path.match(/(\(.+\))$/)[1] rescue nil   # i.e: (.:format)
+      final_optional_segments = path.match(/(\(.+\))$/)[1] rescue ''   # i.e: (.:format)
       path_segments = path.gsub(final_optional_segments,'').split("/")
       new_path = path_segments.map{ |seg| translate_path_segment(seg, locale) }.join('/')
       new_path = "/#{locale}#{new_path}" if add_prefix? locale
